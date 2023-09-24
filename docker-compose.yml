@@ -7,5 +7,17 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITIDB_ROOT_USERNAME=root
+      - MONGO_INITIDB_ROOT_PASSWORD=mongopw
+      - MONGO_INITDB_DATABASE=steliandb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/var/lib/mongodb/data
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 volumes:
   pgdata:
+  mongodata:
